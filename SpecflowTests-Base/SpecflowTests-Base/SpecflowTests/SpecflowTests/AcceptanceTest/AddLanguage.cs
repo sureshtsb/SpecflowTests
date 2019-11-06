@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using NUnit.Framework.Interfaces;
+using OpenQA.Selenium;
 using RelevantCodes.ExtentReports;
 using SpecflowPages;
 using System;
@@ -16,13 +18,13 @@ namespace SpecflowTests.AcceptanceTest
         {
             //Wait
             Thread.Sleep(1500);
-       
+
             // Click on Profile tab
             Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[1]/div/a[2]")).Click();
 
-            
+
         }
-        
+
         [When(@"I add a new language")]
         public void WhenIAddANewLanguage()
         {
@@ -47,6 +49,8 @@ namespace SpecflowTests.AcceptanceTest
         [Then(@"that language should be displayed on my listings")]
         public void ThenThatLanguageShouldBeDisplayedOnMyListings()
         {
+
+
             try
             {
                 //Start the Reports
@@ -58,7 +62,7 @@ namespace SpecflowTests.AcceptanceTest
                 string ExpectedValue = "Spanish";
                 string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody/tr/td[1]")).Text;
                 Thread.Sleep(500);
-                if(ExpectedValue == ActualValue)
+                if (ExpectedValue == ActualValue)
                 {
                     CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added a Language Successfully");
                     SaveScreenShotClass.SaveScreenshot(Driver.driver, "LanguageAdded");
@@ -68,12 +72,12 @@ namespace SpecflowTests.AcceptanceTest
                     CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                CommonMethods.test.Log(LogStatus.Fail, "Test Failed",e.Message);
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
 
-             
+
 
         }
     }

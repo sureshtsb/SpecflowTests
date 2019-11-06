@@ -85,6 +85,11 @@
     </Content>
     <Content Include="ReportXML.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utils\ReportsPath\" />
+    <Folder Include="Utils\Screenshot\" />
+    <Folder Include="Utils\XMLpath\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

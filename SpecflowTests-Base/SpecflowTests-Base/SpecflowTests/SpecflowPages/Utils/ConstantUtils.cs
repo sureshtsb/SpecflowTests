@@ -12,12 +12,12 @@ namespace SpecflowPages
         public static string Url = "http://www.skillswap.pro/";
 
         //ScreenshotPath
-        public static string ScreenshotPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\TestReports\Screenshots\";
+        public static string ScreenshotPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\Utils\Screenshot";
 
         //ExtentReportsPath
-        public static string ReportsPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\TestReports\Test.html";
+        public static string ReportsPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\Utils\ReportsPath";
 
         //ReportXML Path
-       public static string ReportXMLPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\TestReports\Screenshots\ReportXML.xml";
+       public static string ReportXMLPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\Utils\XMLpath";
     }
 }

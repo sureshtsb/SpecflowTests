@@ -37,6 +37,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Mono.Cecil, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\Mono.Cecil.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Mdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\Mono.Cecil.Mdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Pdb, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\Mono.Cecil.Pdb.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Cecil.Rocks, Version=0.9.6.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\Mono.Cecil.Rocks.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -49,9 +61,14 @@
       <HintPath>..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.core.interfaces.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.framework.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="nunit.engine, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\nunit.engine.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.engine.api, Version=3.0.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\nunit.engine.api.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=3.4.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="nunit.util, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\nunit.util.dll</HintPath>
@@ -60,6 +77,9 @@
     <Reference Include="NUnit.VisualStudio.TestAdapter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
       <HintPath>..\packages\NUnitTestAdapter.WithFramework.2.0.0\lib\NUnit.VisualStudio.TestAdapter.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="NUnit3.TestAdapter, Version=3.4.1.0, Culture=neutral, PublicKeyToken=4cb40d35494691ac, processorArchitecture=MSIL">
+      <HintPath>..\packages\NUnit3TestAdapter.3.4.1\lib\NUnit3.TestAdapter.dll</HintPath>
     </Reference>
     <Reference Include="RelevantCodes.ExtentReports, Version=1.4.9.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ExtentReports.2.41.0\lib\RelevantCodes.ExtentReports.dll</HintPath>
@@ -96,24 +116,72 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AcceptanceTest\AddLanguage.cs" />
-    <Compile Include="AddEducation.feature.cs">
+    <Compile Include="AcceptanceTest\feature files\AddCertifications.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AddEducation.feature</DependentUpon>
+      <DependentUpon>AddCertifications.feature</DependentUpon>
     </Compile>
-    <Compile Include="AddEducationSteps.cs" />
-    <Compile Include="DeleteEducationdetailsandValidate.feature.cs">
+    <Compile Include="AcceptanceTest\feature files\AddEducationDetails1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DeleteEducationdetailsandValidate.feature</DependentUpon>
+      <DependentUpon>AddEducationDetails.feature</DependentUpon>
     </Compile>
-    <Compile Include="DeleteEducationdetailsandValidateSteps.cs" />
-    <Compile Include="ModifyEducationDetails.feature.cs">
+    <Compile Include="AcceptanceTest\feature files\AddSkill.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddSkill.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\DeleteCertification.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteCertification.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\DeleteEducationDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteEducationDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\DeleteLanguage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteLanguage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\DeleteSkillsDetails.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteSkillsDetails.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\ModifyCertification.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModifyCertification.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\ModifyEducationDetails.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ModifyEducationDetails.feature</DependentUpon>
     </Compile>
-    <Compile Include="ModifyEducationDetailsSteps.cs" />
+    <Compile Include="AcceptanceTest\feature files\ModifyLanguage.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModifyLanguage.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\feature files\ModifySkills.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModifySkills.feature</DependentUpon>
+    </Compile>
+    <Compile Include="AcceptanceTest\step definitions\AddCertificationsSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\AddEducationdetailsSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\AddSkillSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\DeleteCertificationSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\DeleteEducationDetailsSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\DeleteLanguageSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\DeleteSkillsDetailsSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\ModifyCertificationSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\ModifyEducationDetailsSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\ModifyLanguageSteps.cs" />
+    <Compile Include="AcceptanceTest\step definitions\ModifySkillsSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AcceptanceTest\SpecFlowFeature1.feature.cs">
       <AutoGen>True</AutoGen>
@@ -123,19 +191,51 @@
     <Compile Include="Utils\Start.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="AddEducation.feature">
+    <None Include="AcceptanceTest\feature files\AddCertifications.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>AddEducation.feature.cs</LastGenOutput>
+      <LastGenOutput>AddCertifications.feature.cs</LastGenOutput>
     </None>
-    <None Include="App.config" />
-    <None Include="DeleteEducationdetailsandValidate.feature">
+    <None Include="AcceptanceTest\feature files\AddEducationDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>DeleteEducationdetailsandValidate.feature.cs</LastGenOutput>
+      <LastGenOutput>AddEducationDetails1.feature.cs</LastGenOutput>
     </None>
-    <None Include="ModifyEducationDetails.feature">
+    <None Include="AcceptanceTest\feature files\AddSkill.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>AddSkill.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\DeleteCertification.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteCertification.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\DeleteEducationDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteEducationDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\DeleteLanguage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteLanguage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\DeleteSkillsDetails.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteSkillsDetails.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\ModifyCertification.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ModifyCertification.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\ModifyEducationDetails.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>ModifyEducationDetails.feature.cs</LastGenOutput>
     </None>
+    <None Include="AcceptanceTest\feature files\ModifyLanguage.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ModifyLanguage.feature.cs</LastGenOutput>
+    </None>
+    <None Include="AcceptanceTest\feature files\ModifySkills.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>ModifySkills.feature.cs</LastGenOutput>
+    </None>
+    <None Include="App.config" />
     <None Include="packages.config" />
     <None Include="AcceptanceTest\SpecFlowFeature1.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
