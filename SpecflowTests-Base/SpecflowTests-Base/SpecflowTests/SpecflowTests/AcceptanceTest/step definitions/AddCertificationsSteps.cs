@@ -52,29 +52,39 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("Add a Cerification");
+                CommonMethods.test = CommonMethods.extent.StartTest("Add a certification Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "ISTQB";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[1]")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue == ActualValue)
                 {
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added a cerification Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "CerticationAdded");
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text == "ISTQB")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, added Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "added");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {
                 CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
-
-
-
         }
     }
 }

@@ -17,27 +17,27 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
             //clicking on cerification Tab 
             Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[1]/a[4]")).Click();
             //click on modify button
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[4]/span[1]/i")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[3]/tr/td[4]/span[1]/i")).Click();
         }
         
         [Given(@"I have modified already existing cerification data")]
         public void GivenIHaveModifiedAlreadyExistingCerificationData()
         {
             //clear and enter new data
-            IWebElement certificationmodify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td/div/div/div[1]/input"));
+            IWebElement certificationmodify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[3]/tr/td/div/div/div[1]/input"));
             certificationmodify.Clear();
-            certificationmodify.SendKeys("Selenium");
+            certificationmodify.SendKeys("QTP");
             //clear and enter new data for certified from
-            IWebElement certificationmodify2 = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td/div/div/div[2]/input"));
-            certificationmodify2.Clear();
-            certificationmodify2.SendKeys("Edureka");
+            //IWebElement certificationmodify2 = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td/div/div/div[2]/input"));
+            //certificationmodify2.Clear();
+            //certificationmodify2.SendKeys("Edureka");
         }
         
         [When(@"I Press add button")]
         public void WhenIPressAddButton()
         {
             //click on update
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td/div/span/input[1]")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[3]/tr/td/div/span/input[1]")).Click();
         }
         
         [Then(@"the Modified data should be listed in Certification details\.")]
@@ -48,29 +48,39 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("modify a Cerification");
+                CommonMethods.test = CommonMethods.extent.StartTest("modify a certification Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "Selenium";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[1]")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue == ActualValue)
                 {
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, modified a cerification Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "Certicationmodified");
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "sitar";
+                        if (ActualValue.Text == "QTP")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, modified Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "modified");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {
                 CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
-
-
-
         }
     }
 }

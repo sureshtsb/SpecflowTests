@@ -22,7 +22,7 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
         public void WhenIPressDeleteCerticationButton()
         {
             //click on delete
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody/tr/td[4]/span[2]/i")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[3]/tr/td[4]/span[2]/i")).Click();
         }
         
         [Then(@"the certification details should be deleted")]
@@ -33,21 +33,34 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("Delete a certification Details");
+                CommonMethods.test = CommonMethods.extent.StartTest("delete a certification Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "Selenium";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody[1]/tr/td[1]")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue != ActualValue)
                 {
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[5]/div[1]/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text != "QTP")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {

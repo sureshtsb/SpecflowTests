@@ -23,7 +23,7 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
         [When(@"I click on delete")]
         public void WhenIClickOnDelete()
         {
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[1]/tr/td[3]/span[2]/i")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[5]/tr/td[3]/span[2]/i")).Click();
         }
 
         [Then(@"the skill details should be deleted")]
@@ -34,22 +34,34 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("Delete a skill Details");
+                CommonMethods.test = CommonMethods.extent.StartTest("delete a skill Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "violin";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[1]/tr/td[1]")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue != ActualValue)
                 {
-                    Console.WriteLine("Success");
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text != "sitar")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {

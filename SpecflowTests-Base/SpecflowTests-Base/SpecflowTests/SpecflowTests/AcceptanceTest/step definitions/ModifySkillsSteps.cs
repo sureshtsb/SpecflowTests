@@ -20,17 +20,17 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
             //click on skill tab
             Driver.driver.FindElement(By.XPath("//a[@data-tab='second']")).Click();
             //click on modify symbol
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td[3]/span[1]/i")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[5]/tr/td[3]/span[1]/i")).Click();
         }
 
         [Given(@"I have modified already existing skill data")]
         public void GivenIHaveModifiedAlreadyExistingSkillData()
         {
             //clear and reenter data
-            IWebElement skillModify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input"));
+            IWebElement skillModify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[5]/tr/td/div/div[1]/input"));
             skillModify.Clear();
-            skillModify.SendKeys("violin");
-            IWebElement skilllevelModify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td/div/div[2]/select"));
+            skillModify.SendKeys("sitar");
+            IWebElement skilllevelModify = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[5]/tr/td/div/div[2]/select"));
             SelectElement selectskilllevel = new SelectElement(skilllevelModify);
             selectskilllevel.SelectByText("Beginner");
         }
@@ -38,7 +38,7 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
         [When(@"When I Press add")]
         public void WhenWhenIPressAdd()
         {
-            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td/div/span/input[1]")).Click();
+            Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody[5]/tr/td/div/span/input[1]")).Click();
         }
         
         [Then(@"Then the Modified data should be listed in skills details\.")]
@@ -49,28 +49,39 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("Modify skill details");
+                CommonMethods.test = CommonMethods.extent.StartTest("modify a skills Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "violin";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td/div/div[1]/input")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue == ActualValue)
                 {
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added a skill details Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "SkillDetailsAdded");
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "sitar";
+                        if (ActualValue.Text == "sitar")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, modified Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "modified");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {
                 CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
-
-
         }
     }
 }

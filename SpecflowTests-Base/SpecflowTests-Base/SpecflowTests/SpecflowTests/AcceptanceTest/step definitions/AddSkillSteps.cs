@@ -46,40 +46,42 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
         {
             try
             {
-                
+                //Start the Reports
+                CommonMethods.ExtentReports();
+                Thread.Sleep(1000);
+                CommonMethods.test = CommonMethods.extent.StartTest("Add a Skill Details");
+
+                Thread.Sleep(1000);
+                {
+                    int i;
+                    for (i = 1; i <= 10; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text == "Guitar")
+
                         {
-                            //Start the Reports
-                            CommonMethods.ExtentReports();
-                            Thread.Sleep(1000);
-                            CommonMethods.test = CommonMethods.extent.StartTest("Add Skill Details");
-
-                            Thread.Sleep(1000);
-                            string ExpectedValue = "Guitar";
-                            string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody/tr/td[1]")).Text;
-                            
-                            //Console.WriteLine("ActualValue.Text");
-                            Thread.Sleep(1000);
-                            if (ExpectedValue == ActualValue)
-                            {
-                        Console.WriteLine("Success");
-                                CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added a skill Details Successfully");
-                                SaveScreenShotClass.SaveScreenshot(Driver.driver, "skilladded");
-                            }
-
-                            else
-                                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "added");
+                            Console.WriteLine("Success");
+                            return;
                         }
-                    
-                
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
+                }
             }
             catch (Exception e)
             {
                 CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
-
-
-
         }
     }
 }

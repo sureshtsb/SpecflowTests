@@ -30,30 +30,30 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
             Thread.Sleep(1000);
             IWebElement dropDownListuni = Driver.driver.FindElement(By.XPath("//input[@name='instituteName']"));
             dropDownListuni.SendKeys("JNTU");
-            Console.WriteLine(dropDownListuni.Text);
+            //Console.WriteLine(dropDownListuni.Text);
 
             Thread.Sleep(1000);
             IWebElement dropDownListBox = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[1]/div[2]/select"));
             SelectElement clickThis = new SelectElement(dropDownListBox);
-            clickThis.SelectByText("India");
-            Console.WriteLine(dropDownListBox.Text);
+            clickThis.SelectByText("Brazil");
+            //Console.WriteLine(dropDownListBox.Text);
 
             Thread.Sleep(1000);
             IWebElement dropDowntitle = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[1]/select"));
             SelectElement click = new SelectElement(dropDowntitle);
             click.SelectByText("B.A");
-            Console.WriteLine(dropDowntitle.Text);
+            //Console.WriteLine(dropDowntitle.Text);
 
             Thread.Sleep(1000);
             IWebElement bachelor = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[2]/input"));
             bachelor.SendKeys("Bachelor Degree");
-            Console.WriteLine(bachelor.Text);
+            //Console.WriteLine(bachelor.Text);
 
             Thread.Sleep(1000);
             IWebElement dropDowntitle3 = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[2]/div[3]/select"));
             SelectElement click2 = new SelectElement(dropDowntitle3);
             click2.SelectByText("2016");
-            Console.WriteLine(dropDowntitle3.Text);
+            //Console.WriteLine(dropDowntitle3.Text);
             //clicking add 
             Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/div/div[3]/div/input[1]")).Click();
         }
@@ -61,34 +61,45 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
         [Then(@"Education Details should be added\.")]
         public void ThenEducationDetailsShouldBeAdded_()
         {
+
             try
             {
                 //Start the Reports
                 CommonMethods.ExtentReports();
                 Thread.Sleep(1000);
-                CommonMethods.test = CommonMethods.extent.StartTest("Add Education Details");
+                CommonMethods.test = CommonMethods.extent.StartTest("Add a Education Details");
 
                 Thread.Sleep(1000);
-                string ExpectedValue = "India";
-                string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[5]/tr/td[1]")).Text;
-                Thread.Sleep(500);
-                if (ExpectedValue == ActualValue)
                 {
-                    CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added a education Details Successfully");
-                    SaveScreenShotClass.SaveScreenshot(Driver.driver, "educationadded");
+                    int i;
+                    for (i = 1; i <= 5; i++)
+                    {
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text == "Brazil")
+
+                        {
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, Added Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "Added");
+                            Console.WriteLine("Success");
+                            return;
+                        }
+
+
+                        else
+                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        // Console.WriteLine("Failed");
+
+                    }
                 }
-
-                else
-                    CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-
             }
             catch (Exception e)
             {
                 CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
             }
-
-
-
         }
     }
 }
