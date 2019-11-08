@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using RelevantCodes.ExtentReports;
 using SpecflowPages;
 using System;
@@ -11,6 +12,10 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
     [Binding]
     public class DeleteLanguageSteps
     {
+        private int count;
+
+        // private int count;
+
         [Given(@"I have Clicked on language tab under profile tab")]
         public void GivenIHaveClickedOnLanguageTabUnderProfileTab()
         {
@@ -39,34 +44,41 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
 
                 Thread.Sleep(1000);
                 {
+                    count = 1;
+                   // count++;
                     int i;
-                    for (i = 1; i <= 10; i++)
+                    for (i = 1; i <= count++; i++)
                     {
                         //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
-                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]"));
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
                         Thread.Sleep(1000);
                         Console.WriteLine(ActualValue.Text);
                         //string ExpectedValue = "Spanish";
-                        if (ActualValue.Text != "Telugu")
+                        if (ActualValue.Text == "Telugu")
 
                         {
-                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
-                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "modifdeleteied");
-                            Console.WriteLine("Success");
-                            return;
+                            //CommonMethods.test.Log(LogStatus.Fail, "Test Failed, not deleted Successfully");
+                           SaveScreenShotClass.SaveScreenshot(Driver.driver, "notdeleted");
+                           Console.WriteLine("Fail");
+                           Assert.Fail("failed");
+                            // return;
                         }
 
 
                         else
-                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-                        // Console.WriteLine("Failed");
-
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed");
+                        SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                        // Console.WriteLine("Success");
+                        
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
+                Console.WriteLine("Success",ex.Message);
+
+                // CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                //  Assert.Fail(ex.Message);
             }
         }
     }

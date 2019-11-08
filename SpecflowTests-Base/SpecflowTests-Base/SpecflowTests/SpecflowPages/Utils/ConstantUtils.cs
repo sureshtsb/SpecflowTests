@@ -11,9 +11,16 @@ namespace SpecflowPages
     {
         //Base Url
         public static string Url = "http://www.skillswap.pro/";
+        public static string ScreenshotPath = Directory.GetCurrentDirectory() + @"\SpecflowPages\TestReports\Screenshots\";
+
 
         //ScreenshotPath
-        public static string ScreenshotPath = Directory.GetCurrentDirectory() + @"\SpecflowPages\TestReports\Screenshots\";
+        //string currentDirectory = Environment.CurrentDirectory;
+
+        //public static string ScreenshotPath = Directory.GetCurrentDirectory() + @"\SpecflowPages\TestReports\Screenshots\";
+
+        // public static string ScreenshotPath = Directory.GetCurrentDirectory() + @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\TestReports\Screenshots\";
+
         //public static string ScreenshotPath = @"C:\Users\arun\source\repos\SpecflowTests-Base(1)\SpecflowTests-Base\SpecflowTests-Base\SpecflowTests\SpecflowPages\TestReports\Screenshots\";
 
 

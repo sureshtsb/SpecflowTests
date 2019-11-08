@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using RelevantCodes.ExtentReports;
 using SpecflowPages;
 using System;
@@ -11,6 +12,8 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
     [Binding]
     public class DeleteSkillsDetailsSteps
     {
+        private int count;
+
         [Given(@"I have clicked on skills details which is present under the profile")]
         public void GivenIHaveClickedOnSkillsDetailsWhichIsPresentUnderTheProfile()
         {
@@ -38,34 +41,40 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
 
                 Thread.Sleep(1000);
                 {
+                    count = 1;
+                    // count++;
                     int i;
-                    for (i = 1; i <= 10; i++)
+                    for (i = 1; i <= count++; i++)
+                    
                     {
                         //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
                         IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
                         Thread.Sleep(1000);
                         Console.WriteLine(ActualValue.Text);
                         //string ExpectedValue = "Spanish";
-                        if (ActualValue.Text != "sitar")
+                        if (ActualValue.Text == "sitar")
 
                         {
-                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, deleted Successfully");
-                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
-                            Console.WriteLine("Success");
-                            return;
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "notdeleted");
+                            Console.WriteLine("Fail");
+                            Assert.Fail("failed");
                         }
 
 
                         else
-                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-                        // Console.WriteLine("Failed");
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed");
+                        SaveScreenShotClass.SaveScreenshot(Driver.driver, "deleted");
+                        // Console.WriteLine("Success");
 
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
+                Console.WriteLine("Success", ex.Message);
+
+                // CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                //  Assert.Fail(ex.Message);
             }
         }
     }

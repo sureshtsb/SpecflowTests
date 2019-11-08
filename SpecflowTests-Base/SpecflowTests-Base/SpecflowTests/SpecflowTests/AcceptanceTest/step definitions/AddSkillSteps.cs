@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using RelevantCodes.ExtentReports;
 using SpecflowPages;
@@ -12,6 +13,8 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
     [Binding]
     public class AddSkillSteps
     {
+        private int count;
+
         [Given(@"I have clicked on skill tab under profile")]
         public void GivenIHaveClickedOnSkillTabUnderProfile()
         {
@@ -53,12 +56,14 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
 
                 Thread.Sleep(1000);
                 {
+                    count = 1;
+                    count++;
                     int i;
-                    for (i = 1; i <= 10; i++)
+                    for (i = 1; i <= count++; i++)
                     {
                         //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
                         IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[3]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
-                        Thread.Sleep(1000);
+                       // Thread.Sleep(1000);
                         Console.WriteLine(ActualValue.Text);
                         //string ExpectedValue = "Spanish";
                         if (ActualValue.Text == "Guitar")
@@ -72,15 +77,16 @@ namespace SpecflowTests.AcceptanceTest.step_definitions
 
 
                         else
-                            CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-                        // Console.WriteLine("Failed");
+                           // CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                        Console.WriteLine("Failed");
 
                     }
                 }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                Assert.Fail(ex.Message);
             }
         }
     }

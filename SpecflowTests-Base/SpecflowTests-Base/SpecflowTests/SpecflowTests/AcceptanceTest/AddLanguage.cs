@@ -13,6 +13,8 @@ namespace SpecflowTests.AcceptanceTest
     [Binding]
     public class SpecFlowFeature1Steps : Utils.Start
     {
+        private int count;
+
         [Given(@"I clicked on the Language tab under Profile page")]
         public void GivenIClickedOnTheLanguageTabUnderProfilePage()
         {
@@ -55,40 +57,54 @@ namespace SpecflowTests.AcceptanceTest
             {
                 //Start the Reports
                 CommonMethods.ExtentReports();
-                Thread.Sleep(1000);
+
                 CommonMethods.test = CommonMethods.extent.StartTest("Add a Education Details");
 
-                Thread.Sleep(1000);
-                { 
-                int i;
-                for (i = 1; i <= 10; i++)
+
                 {
-                    //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
-                    IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody["+i+"]/tr/td[1]"));
-                    Thread.Sleep(1000);
-                    Console.WriteLine(ActualValue.Text);
-                    //string ExpectedValue = "Spanish";
-                    if (ActualValue.Text == "Spanish")
-
+                    count = 1;
+                    count++;
+                    int i;
+                    for (i = 1; i <= count++; i++)
                     {
-                        CommonMethods.test.Log(LogStatus.Pass, "Test Passed, added Successfully");
-                        SaveScreenShotClass.SaveScreenshot(Driver.driver, "added");
-                        Console.WriteLine("Success");
-                        return;
+
+                        //string ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[4]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]")).Text;
+                        IWebElement ActualValue = Driver.driver.FindElement(By.XPath("//*[@id='account-profile-section']/div/section[2]/div/div/div/div[3]/form/div[2]/div/div[2]/div/table/tbody[" + i + "]/tr/td[1]"));
+                        Thread.Sleep(1000);
+                        //string actualvalue = "ActualValue.Text";
+                        //Console.WriteLine(ActualValue.Text);
+                        //string ExpectedValue = "Spanish";
+                        if (ActualValue.Text == "Spanish")
+                        //Assert.AreEqual(actualvalue, "Spanish");
+                        {
+
+                            CommonMethods.test.Log(LogStatus.Pass, "Test Passed, added Successfully");
+                            SaveScreenShotClass.SaveScreenshot(Driver.driver, "added");
+                            Console.WriteLine("Passed");
+                            return;
+                        }
+
+                        else
+
+                            Console.WriteLine("Failed");
                     }
-
-
-                    else
-                        CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
-                    // Console.WriteLine("Failed");
 
                 }
             }
-            }
-            catch (Exception e)
+
+            catch (Exception ex)
             {
-                CommonMethods.test.Log(LogStatus.Fail, "Test Failed", e.Message);
+                CommonMethods.test.Log(LogStatus.Fail, "Test Failed");
+                Assert.Fail(ex.Message);
             }
-}
+        }
     }
 }
+
+
+
+
+
+
+
+
